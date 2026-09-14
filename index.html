@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jemblem Manis - Toko Online</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background: #fff8ef;
+            color: #4b2e1e;
+        }
+
+        header {
+            background: linear-gradient(135deg, #8b4513, #d2691e);
+            color: white;
+            text-align: center;
+            padding: 30px 20px;
+        }
+
+        header h1 {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .container {
+            width: 92%;
+            max-width: 1050px;
+            margin: 30px auto;
+        }
+
+        .judul {
+            margin-bottom: 20px;
+        }
+
+        .produk {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+            padding: 15px;
+            border-radius: 18px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+        }
+
+        .card img {
+            width: 100%;
+            height: 210px;
+            object-fit: cover;
+            border-radius: 14px;
+        }
+
+        .card h3 {
+            margin: 14px 0 7px;
+        }
+
+        .harga {
+            color: #d2691e;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        button {
+            border: none;
+            background: #d2691e;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 9px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #a94f10;
+        }
+
+        /* KERANJANG */
+        .keranjang {
+            background: white;
+            margin-top: 35px;
+            padding: 22px;
+            border-radius: 18px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.12);
+        }
+
+        .item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .jumlah button {
+            padding: 5px 10px;
+            margin: 0 3px;
+        }
+
+        .total {
+            text-align: right;
+            font-size: 21px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+
+        /* FORM */
+        .form {
+            margin-top: 25px;
+        }
+
+        .form label {
+            display: block;
+            font-weight: bold;
+            margin: 10px 0 5px;
+        }
+
+        .form input,
+        .form textarea {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ddd;
+            border-radius: 9px;
+            font-size: 15px;
+        }
+
+        .form textarea {
+            height: 80px;
+        }
+
+        /* CHECKOUT */
+        .checkout {
+            width: 100%;
+            margin-top: 20px;
+            background: #25d366;
+            font-size: 17px;
+        }
+
+        .checkout:hover {
+            background: #1da851;
+        }
+
+        .kontak {
+            margin-top: 20px;
+            background: #fff1dd;
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        footer {
+            margin-top: 40px;
+            background: #8b4513;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        @media (max-width: 500px) {
+            header h1 {
+                font-size: 26px;
+            }
+
+            .card img {
+                height: 190px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+    <h1>🍠 Jemblem Manis</h1>
+    <p>Jajanan tradisional yang renyah, manis, dan lezat!</p>
+</header>
+
+
+<div class="container">
+
+    <h2 class="judul">🍽️ Menu Jemblem</h2>
+
+    <!-- PRODUK -->
+    <div class="produk">
+
+        <!-- PRODUK 1 -->
+        <div class="card">
+            <img src="jemblem-coklat.jpg" alt="Jemblem Cokelat">
+
+            <h3>Jemblem Cokelat</h3>
+
+            <p class="harga">
+                Rp3.000
+            </p>
+
+            <button onclick="tambah('Jemblem Cokelat', 3000)">
+                + Keranjang
+            </button>
+        </div>
+
+
+        <!-- PRODUK 2 -->
+        <div class="card">
+            <img src="jemblem-gulamerah.jpg" alt="Jemblem Gula Merah">
+
+            <h3>Jemblem Gula Merah</h3>
+
+            <p class="harga">
+                Rp2.500
+            </p>
+
+            <button onclick="tambah('Jemblem Gula Merah', 2500)">
+                + Keranjang
+            </button>
+        </div>
+
+
+        <!-- PRODUK 3 -->
+        <div class="card">
+            <img src="jemblem-original.jpg" alt="Jemblem Original">
+
+            <h3>Jemblem Original</h3>
+
+            <p class="harga">
+                Rp2.000
+            </p>
+
+            <button onclick="tambah('Jemblem Original', 2000)">
+                + Keranjang
+            </button>
+        </div>
+
+    </div>
+
+
+    <!-- KERANJANG -->
+    <div class="keranjang">
+
+        <h2>🛒 Keranjang Belanja</h2>
+
+        <div id="keranjang">
+
+            <p style="margin-top:15px;">
+                Keranjang masih kosong.
+            </p>
+
+        </div>
+
+
+        <div class="total">
+
+            Total:
+            Rp<span id="total">0</span>
+
+        </div>
+
+
+        <!-- DATA PEMBELI -->
+        <div class="form">
+
+            <label>👤 Nama Pembeli</label>
+
+            <input
+                type="text"
+                id="nama"
+                placeholder="Masukkan nama"
+            >
+
+
+            <label>📍 Alamat</label>
+
+            <textarea
+                id="alamat"
+                placeholder="Masukkan alamat pengantaran"
+            ></textarea>
+
+
+            <label>📝 Catatan</label>
+
+            <input
+                type="text"
+                id="catatan"
+                placeholder="Contoh: jangan terlalu manis"
+            >
+
+        </div>
+
+
+        <!-- CHECKOUT -->
+        <button
+            class="checkout"
+            onclick="checkout()"
+        >
+            📱 Checkout via WhatsApp
+        </button>
+
+
+        <div class="kontak">
+
+            📞 WhatsApp Toko:
+            <b>0812-3456-7890</b>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <p>
+        © 2026 Jemblem Manis
+    </p>
+
+    <p>
+        Terima kasih sudah berbelanja ❤️
+    </p>
+
+</footer>
+
+
+<script>
+
+    // TEMPAT MENYIMPAN BARANG
+    let keranjang = [];
+
+
+    // TAMBAH BARANG
+    function tambah(nama, harga) {
+
+        let item = keranjang.find(
+            item => item.nama === nama
+        );
+
+        if (item) {
+
+            item.jumlah++;
+
+        } else {
+
+            keranjang.push({
+
+                nama: nama,
+                harga: harga,
+                jumlah: 1
+
+            });
+
+        }
+
+        tampilkanKeranjang();
+
+    }
+
+
+    // KURANG BARANG
+    function kurang(nama) {
+
+        let item = keranjang.find(
+            item => item.nama === nama
+        );
+
+        if (item) {
+
+            item.jumlah--;
+
+            if (item.jumlah <= 0) {
+
+                keranjang =
+                    keranjang.filter(
+                        item => item.nama !== nama
+                    );
+
+            }
+
+        }
+
+        tampilkanKeranjang();
+
+    }
+
+
+    // MENAMPILKAN KERANJANG
+    function tampilkanKeranjang() {
+
+        let area =
+            document.getElementById("keranjang");
+
+        let total = 0;
+
+
+        if (keranjang.length === 0) {
+
+            area.innerHTML =
+                "<p style='margin-top:15px;'>Keranjang masih kosong.</p>";
+
+            document.getElementById("total")
+                .innerText = "0";
+
+            return;
+        }
+
+
+        area.innerHTML = "";
+
+
+        keranjang.forEach(item => {
+
+            let subtotal =
+                item.harga * item.jumlah;
+
+            total += subtotal;
+
+
+            area.innerHTML += `
+
+                <div class="item">
+
+                    <div>
+
+                        <b>${item.nama}</b>
+
+                        <br>
+
+                        Rp${item.harga.toLocaleString("id-ID")}
+
+                    </div>
+
+
+                    <div class="jumlah">
+
+                        <button
+                            onclick="kurang('${item.nama}')"
+                        >
+                            −
+                        </button>
+
+                        ${item.jumlah}
+
+                        <button
+                            onclick="tambah('${item.nama}', ${item.harga})"
+                        >
+                            +
+                        </button>
+
+                    </div>
+
+                </div>
+
+            `;
+
+        });
+
+
+        document.getElementById("total")
+            .innerText =
+            total.toLocaleString("id-ID");
+
+    }
+
+
+    // CHECKOUT WHATSAPP
+    function checkout() {
+
+        if (keranjang.length === 0) {
+
+            alert("Keranjang masih kosong!");
+
+            return;
+
+        }
+
+
+        let nama =
+            document.getElementById("nama")
+            .value.trim();
+
+
+        let alamat =
+            document.getElementById("alamat")
+            .value.trim();
+
+
+        let catatan =
+            document.getElementById("catatan")
+            .value.trim();
+
+
+        if (!nama || !alamat) {
+
+            alert(
+                "Silakan isi nama dan alamat terlebih dahulu."
+            );
+
+            return;
+
+        }
+
+
+        let pesan =
+            "Halo, saya ingin memesan Jemblem:%0A%0A";
+
+
+        let total = 0;
+
+
+        keranjang.forEach(item => {
+
+            let subtotal =
+                item.harga * item.jumlah;
+
+            total += subtotal;
+
+
+            pesan +=
+                "• " +
+                item.nama +
+                " x" +
+                item.jumlah +
+                " = Rp" +
+                subtotal.toLocaleString("id-ID") +
+                "%0A";
+
+        });
+
+
+        pesan +=
+            "%0A💰 Total: Rp" +
+            total.toLocaleString("id-ID");
+
+
+        pesan +=
+            "%0A👤 Nama: " +
+            encodeURIComponent(nama);
+
+
+        pesan +=
+            "%0A📍 Alamat: " +
+            encodeURIComponent(alamat);
+
+
+        if (catatan) {
+
+            pesan +=
+                "%0A📝 Catatan: " +
+                encodeURIComponent(catatan);
+
+        }
+
+
+        // GANTI DENGAN NOMOR WA TOKO
+        let nomorWA =
+            "6281234567890";
+
+
+        window.open(
+
+            "https://wa.me/" +
+            nomorWA +
+            "?text=" +
+            pesan,
+
+            "_blank"
+
+        );
+
+    }
+
+</script>
+
+</body>
+  </html>
